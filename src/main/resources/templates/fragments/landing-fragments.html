@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf fragments for landing templates</title>
+</head>
+<body>
+
+<th:block th:fragment="landing-main-menu(activeLink)">
+	<nav class="nav nav-masthead justify-content-center">
+		<a class="nav-link" th:classappend="${activeLink}=='home' ? ' active'" th:href="@{/}" href="#">Home</a>		
+		<a class="nav-link" th:classappend="${activeLink}=='info' ? ' active'" th:href="@{/info}" href="#">Info</a> 
+		<a class="nav-link" th:classappend="${activeLink}=='login' ? ' active'" th:href="@{/showLoginPage}" href="#" sec:authorize="not isAuthenticated()">Login</a> 
+		<a class="nav-link" th:classappend="${activeLink}=='logout' ? ' active'" th:href="@{/logout}" href="#" sec:authorize="isAuthenticated()">Logout</a>
+		<a class="nav-link" th:href="@{/enter}" href="#">Enter</a>
+	</nav>
+</th:block>
+
+</body>
+</html>

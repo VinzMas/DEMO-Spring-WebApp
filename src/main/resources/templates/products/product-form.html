@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<title th:text="${@environment.getProperty('info.app.name')} + ' - Product Form'">Title</title></head>
+<body>
+
+	<div class="container">
+		<h3>Product Directory</h3>
+		<p class="h4 mb-4">Save Product</p>
+		<form action="#" th:action="@{/product/save}" th:object="${product}"
+			method="POST">
+
+			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{purchases}" /> 
+			
+			<div class="form-group">
+				<label for="name">Name</label>			
+				<input type="text" id="name"
+					th:field="*{name}" class="form-control mb col-4"
+					th:classappend="not ${#fields.hasErrors('name')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'"
+					placheholder="Insert product name" />
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('name')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+			<div class="form-group">
+				<label for="price">Price</label>						
+				<input type="text" id="price"
+					th:field="*{price}" class="form-control mb col-4"
+					th:classappend="not ${#fields.hasErrors('price')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'"
+					placheholder="Insert product price" />
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('price')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+			<div class="form-group">			
+				<label for="category">Category</label>			
+				<input type="text" id="category"
+					th:field="*{category}" class="form-control mb col-4"
+					th:classappend="not ${#fields.hasErrors('category')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'"
+					placheholder="Insert product category" />
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('category')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+			<div class="form-group">			
+				<label for="description">Description</label>			
+				<input type="text" id="description"
+					th:field="*{description}" class="form-control mb col-4"
+					th:classappend="not ${#fields.hasErrors('description')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'"
+					placheholder="Insert a description" />
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('description')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+			<div class="form-group">			
+				<label for="quantityInStock">Quantity in stock</label>			
+				<input type="text" id="quantityInStock"
+					th:field="*{quantityInStock}" class="form-control mb col-4"
+					th:classappend="not ${#fields.hasErrors('quantityInStock')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'"
+					placheholder="Insert the quantity in stock" />
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('quantityInStock')}" th:errors="*{quantityInStock}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('quantityInStock')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+			<div class="form-group">			
+				<div class="form-check">			
+					<input type="checkbox" id="isActive"
+						th:field="*{isActive}" class="form-check-input mb col-4"/>
+					<label for="isActive" class="form-check-label" >Active</label>			
+				</div>
+			</div>	
+			<button type="submit" class="btn btn-info col-2">Save</button>
+			<a th:href="@{/product/list}" class="btn btn-link col-2">Back to list</a>
+			
+		</form>
+
+	</div>
+
+</body>
+</html>

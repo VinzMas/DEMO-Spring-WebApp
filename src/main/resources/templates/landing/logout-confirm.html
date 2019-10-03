@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Jekyll v3.8.5">
+<title
+	th:text="${@environment.getProperty('info.app.name')} + ' - Log in'">Title</title>
+
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<link
+	href="https://getbootstrap.com/docs/4.3/examples/sign-in/signin.css"
+	rel="stylesheet" crossorigin="anonymous" />
+
+
+<!-- Custom styles for this template -->
+<!--     <link href="login.css" rel="stylesheet"> -->
+</head>
+<body class="text-center">
+	<form class="form-signin" method="post"
+		th:action="@{/logout}">
+		<h1 class="h3 mb-3 font-weight-normal">Do you want to log out?</h1>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Log
+			out</button>
+		<a th:href="@{/}" class="btn btn-link">Back to Home</a>
+		<p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+	</form>
+</body>
+</html>

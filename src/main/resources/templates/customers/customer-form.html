@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<title th:text="${@environment.getProperty('info.app.name')} + ' - Customer Form'">Title</title></head>
+<body>
+
+	<div class="container">
+		<h3>Customer Directory</h3>
+		<p class="h4 mb-4">Save Customer</p>
+		<form action="#" th:action="@{/customer/save}" th:object="${customer}" method="POST">
+
+			<input type="hidden" th:field="*{id}" /> 
+			
+			<div class="form-group">
+				<label for="firstName">First name</label>
+				<input type="text" id="firstName"
+					th:field="*{firstName}" 
+					class="form-control mb col-4"
+					th:classappend="not ${#fields.hasErrors('firstName')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'"
+					placheholder="Insert last name" />
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('firstName')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="lastName">Last name</label>
+				<input type="text" id="lastName"
+					th:field="*{lastName}" 
+					class="form-control mb col-4"
+					th:classappend="not ${#fields.hasErrors('lastName')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'"
+					placheholder="Inser last name" />
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('lastName')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="text" id="email"
+					th:field="*{email}" 
+					class="form-control mb col-4"
+					th:classappend="not ${#fields.hasErrors('email')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'"
+					placheholder="mymail@example.com" />
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('email')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+			<div class="form-group">
+				<label for="address">Address</label>
+				<input type="text" id="address"
+					th:field="*{address}" 
+					class="form-control mb col-4"
+					th:classappend="not ${#fields.hasErrors('address')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'"
+					placheholder="Inser address" />
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('address')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+			<div class="form-group">			
+				<div class="form-check">			
+					<input type="checkbox" id="isActive"
+						th:field="*{isActive}" class="form-check-input mb col-4"/>
+					<label for="isActive" class="form-check-label" >Active</label>			
+				</div>
+			</div>	
+			<button type="submit" class="btn btn-info col-2">Save</button>
+			<a th:href="@{/customer/list}" class="btn btn-link col-2">Back to list</a>
+						
+		</form>
+
+	</div>
+
+</body>
+</html>

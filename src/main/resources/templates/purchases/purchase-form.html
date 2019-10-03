@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<title th:text="${@environment.getProperty('info.app.name')} + ' - Purchase Form'">Title</title></head>
+<body>
+
+	<div class="container">
+		<h3>Purchase Directory</h3>
+		<p class="h4 mb-4">Save Purchase</p>
+		<form action="#" th:action="@{/purchase/save}" th:object="${purchase}"
+			method="POST">
+
+			<input type="hidden" th:field="*{id}" /> 
+			
+			<div class="form-group">
+				<label for="dateTime">Purchase date</label>
+				<input type="text" id="dateTime"
+					th:field="*{dateTime}" class="form-control mb col-4"
+					th:classappend="not ${#fields.hasErrors('dateTime')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'"
+					placheholder="Enter Date"/>
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('dateTime')}" th:errors="*{dateTime}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('dateTime')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+			<div class="form-group">
+				<label for="paymentMethod">Select Payment Method</label>
+				<select th:field="*{paymentMethod}" id="paymentMethod" class="form-control mb col-4"
+						th:classappend="not ${#fields.hasErrors('paymentMethod')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'">	
+					<option value="" disabled selected>Select the payment method</option>
+					<!-- <option th:each="tempPayMethod : ${purchase.paymentMethod.getDeclaringClass().getEnumConstants()}" -->	
+					<option th:each="tempPayMethod : ${T(com.crmwebapp.demo.PaymentMethod).values()}"		
+						th:value="${tempPayMethod}" th:text="${tempPayMethod}">
+					</option>
+				</select>
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('paymentMethod')}" th:errors="*{paymentMethod}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('paymentMethod')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+			
+			<div class="form-group" th:if="${isAnAdd}">
+				<label for="customers">Select customers</label>
+				<select th:field="*{customer}" id="customers" class="form-control mb col-4"
+						th:classappend="not ${#fields.hasErrors('customer')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'">
+					<option th:each="tempCustomer : ${customers}" 
+						th:value="${tempCustomer.id}" th:text="${tempCustomer.completeName} + ' - ' + ${tempCustomer.email}">
+					</option>	
+				</select>
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('customer')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+						
+			<input type="hidden" th:field="*{customer}" th:unless="${isAnAdd}"/>
+			
+			<div class="form-group">
+				<label for="products">Select products</label>
+				<select multiple th:field="*{products}" id="products" class="form-control col-4"
+						th:classappend="not ${#fields.hasErrors('products')} ? (${#fields.hasErrors('*')} ? 'is-valid' : '') : 'is-invalid'">
+					
+					<th:block th:if="${isAnAdd}">
+						<option th:each="tempProduct : ${products}" 
+							th:value="${tempProduct.id}" th:text="${tempProduct.name} + ' - ' + ${tempProduct.price}">
+						</option>
+					</th:block>
+					
+					<th:block th:unless="${isAnAdd}">
+						<option th:each="tempProduct : ${products}" 
+							th:value="${tempProduct.id}" th:text="${tempProduct.name} + ' - ' + ${tempProduct.price}"
+							th:selected="${#lists.contains(purchase.products, tempProduct)}" >
+						</option>
+					</th:block>
+							
+				</select> 
+				<div>
+        			<small class="text-danger" th:if="${#fields.hasErrors('products')}" th:errors="*{products}">Error Message</small>
+        			<small class="text-success" th:if="not ${#fields.hasErrors('products')} AND ${#fields.hasErrors('*')}" th:text="OK">Error Message</small>
+     			</div>
+			</div>
+			<hr>				
+			<button type="submit" class="btn btn-info col-2">Save</button>
+			<a th:href="@{/purchase/list}" class="btn btn-link col-2">Back to list</a>
+			
+		</form>
+
+	</div>
+
+</body>
+</html>
