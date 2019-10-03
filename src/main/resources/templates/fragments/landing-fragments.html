@@ -13,6 +13,7 @@
 		<a class="nav-link" th:classappend="${activeLink}=='login' ? ' active'" th:href="@{/showLoginPage}" href="#" sec:authorize="not isAuthenticated()">Login</a> 
 		<a class="nav-link" th:classappend="${activeLink}=='logout' ? ' active'" th:href="@{/logout}" href="#" sec:authorize="isAuthenticated()">Logout</a>
 		<a class="nav-link" th:href="@{/enter}" href="#">Enter</a>
+		<a class="nav-link" th:href="${@environment.getProperty('version-control.repo.remote.link')}" href="#">GitHub</a>
 	</nav>
 </th:block>
 
