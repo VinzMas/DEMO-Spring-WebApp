@@ -22,8 +22,6 @@ public class CustomerTests {
 	static Customer customerSameId2;
 	static Customer customerDifferentId;
 
-
-	@Mock static Purchase purchase;
 	static List<Purchase> purchases = new ArrayList<Purchase>();
 
 	@BeforeClass
