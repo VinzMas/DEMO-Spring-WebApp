@@ -83,11 +83,11 @@
 	</th:block>
 	
 	<th:block th:fragment="delete-button(objectType,tempEntityId)"
-	th:with="theEntityController=${#strings.toLowerCase(objectType)} , relLink='/' + ${theEntityController} + '/delete' , entityId=${theEntityController} + 'Id'">
+	th:with="objectTypeLowerCase=${#strings.toLowerCase(objectType)}, theEntityController=${objectTypeLowerCase} , relLink='/' + ${theEntityController} + '/delete' , entityId=${theEntityController} + 'Id'">
 		<a
 			th:href="@{${relLink}(${entityId}=${tempEntityId})}"
 			class="btn btn-danger btn-sm"
-			onclick="if (!(confirm('Are you sure you want to delete this purchase?'))) return false">Delete</a>
+			th:onclick="if (!(confirm('Are you sure you want to delete this [(${objectTypeLowerCase})]?'))) return false">Delete</a>
 	</th:block>
 </body>
 </html>
