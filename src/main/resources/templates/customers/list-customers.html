@@ -17,23 +17,10 @@
 		<hr>
 		<div class="d-flex">
 			<div class="p-2">
-				<!-- <a th:href="@{/customer/showFormForAdd}"
-					class="btn btn-primary btn-sm mb-3"> Add Customer </a> -->
 				<div th:replace="fragments/list-fragments :: add-button(Customer)">Add Button</div>
 			</div>
 			<div class="ml-auto p-2">
-				<!-- <div class="btn-group">
-  					<button type="button" class="btn btn-info btn-sm">Show</button>
-  					<button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    					<span class="sr-only">Toggle Dropdown</span>
-  					</button>
-  					<div class="dropdown-menu dropdown-menu-right">
-    					<a class="dropdown-item" th:href="@{/customer/list}" href="#">All</a>
-   						<a class="dropdown-item" th:href="@{/customer/list/active}" href="#">Actives</a>
-   						<a class="dropdown-item" th:href="@{/customer/list/inactive}" href="#">Inactives</a>
-  					</div>
-				</div> -->
-			<div th:replace="fragments/list-fragments :: show-by-active-status(Customer)">Show Button</div>
+				<div th:replace="fragments/list-fragments :: show-by-active-status(Customer)">Show Button</div>
 			</div>
 		</div>
 	
@@ -62,10 +49,6 @@
 					<td>
 						<div th:replace="fragments/list-fragments :: update-button-dropdown(Customer,${tempCustomer.id},${tempCustomer.isActive})">Update Button</div>
 						<th:block sec:authorize="hasRole('ROLE_ADMIN')">
-							<!-- <a
-							th:href="@{/customer/delete(customerId=${tempCustomer.id})}"
-							class="btn btn-danger btn-sm"
-							onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a> -->
 							<div th:replace="fragments/list-fragments :: delete-button(Customer,${tempCustomer.id})">Delete Button</div>
 						</th:block>
 					</td>
