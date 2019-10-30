@@ -32,7 +32,7 @@ class WebMessagesManagerAspect {
 
 
 		/* Senza questo controllo verrebbero appesi messaggi tante volte quante si tenta
-		 * si aggiungere/modificare un elemento; così invece il messaggio viene assemblato
+		 * di aggiungere/modificare un elemento; così invece il messaggio viene assemblato
 		 * una sola volta
 		 */
 		if (!theBindingResult.hasErrors()) {

@@ -61,17 +61,22 @@ public class PurchaseController {
 		return "purchases/purchase-form";
 	}
 
+	private void provideCustomers(Model theModel) {
+		List<Customer> customers = customerService.findAll();
+		theModel.addAttribute("customers", customers);
+	}
+
+	private void provideProducts(Model theModel) {
+		List<Product> products = productService.findAll();
+		theModel.addAttribute("products", products);
+	}
+
 	//TODO: considerare di rinominare anche questo come quelli degli altri controller
 	@GetMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("purchaseId") Long theId, Model theModel) {
 		Purchase thePurchase = purchaseService.findById(theId);
-		
-		System.out.println(thePurchase);
-		
 		theModel.addAttribute("purchase", thePurchase);
-
 		provideProducts(theModel);
-
 		theModel.addAttribute("isAnAdd", false);
 		
 		return "purchases/purchase-form";
@@ -86,13 +91,14 @@ public class PurchaseController {
 		if (theBindingResult.hasErrors()) {
 			ifIsAnAddProvideCustomers(theModel, thePurchase);
 			provideProducts(theModel);
-
 			return "purchases/purchase-form";		
 		} else {
 			purchaseService.save(thePurchase);
 			return "redirect:/purchase/list";
 		}
 	}
+
+
 
 	private void ifIsAnAddProvideCustomers(Model theModel, Purchase thePurchase) {
 		if (isAnAdd(thePurchase)) {
@@ -102,16 +108,6 @@ public class PurchaseController {
 
 	private boolean isAnAdd(Purchase thePurchase) {
 		return thePurchase.getId() == null;
-	}
-
-	private void provideCustomers(Model theModel) {
-		List<Customer> customers = customerService.findAll();
-		theModel.addAttribute("customers", customers);
-	}
-	
-	private void provideProducts(Model theModel) {
-		List<Product> products = productService.findAll();
-		theModel.addAttribute("products", products);
 	}
 
 	@GetMapping("/delete")

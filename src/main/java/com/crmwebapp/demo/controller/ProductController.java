@@ -102,7 +102,6 @@ public class ProductController {
 	public String save(@Valid @ModelAttribute("product") Product theProduct, BindingResult theBindingResult) {
 		if (theBindingResult.hasErrors()) {
 			return "products/product-form";
-		
 		} else {
 			productService.save(theProduct);
 			return "redirect:/product/list";
